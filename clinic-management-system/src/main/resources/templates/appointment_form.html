@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Appointment</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="navbar">
+    <h1>🏥 Clinic Management System</h1>
+    <nav>
+        <a th:href="@{/patients}">Patients</a>
+        <a th:href="@{/doctors}">Doctors</a>
+        <a th:href="@{/appointments}">Appointments</a>
+    </nav>
+</header>
+
+<main class="content">
+    <h2>Book Appointment</h2>
+
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+
+    <form th:action="@{/appointments/save}" method="post" class="form">
+        <label>Patient</label>
+        <select name="patientId" required>
+            <option th:each="p : ${patients}" th:value="${p.id}" th:text="${p.name}"></option>
+        </select>
+
+        <label>Doctor</label>
+        <select name="doctorId" required>
+            <option th:each="d : ${doctors}" th:value="${d.id}"
+                    th:text="${d.name} + ' (' + ${d.specialization} + ')'"></option>
+        </select>
+
+        <label>Date</label>
+        <input type="date" name="appointmentDate" required>
+
+        <label>Time</label>
+        <input type="time" name="appointmentTime" required>
+
+        <label>Reason for Visit</label>
+        <textarea name="reason" placeholder="e.g. General checkup, follow-up consultation"></textarea>
+
+        <button type="submit" class="btn">Book Appointment</button>
+        <a th:href="@{/appointments}" class="btn secondary">Cancel</a>
+    </form>
+</main>
+</body>
+</html>

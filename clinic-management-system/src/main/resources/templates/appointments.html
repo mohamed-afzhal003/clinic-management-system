@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Appointments</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="navbar">
+    <h1>🏥 Clinic Management System</h1>
+    <nav>
+        <a th:href="@{/patients}">Patients</a>
+        <a th:href="@{/doctors}">Doctors</a>
+        <a th:href="@{/appointments}">Appointments</a>
+    </nav>
+</header>
+
+<main class="content">
+    <div class="content-header">
+        <h2>Appointments</h2>
+        <a class="btn" th:href="@{/appointments/new}">+ Book Appointment</a>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="appt : ${appointments}">
+            <td th:text="${appt.patient.name}"></td>
+            <td th:text="${appt.doctor.name}"></td>
+            <td th:text="${appt.appointmentDate}"></td>
+            <td th:text="${appt.appointmentTime}"></td>
+            <td th:text="${appt.reason}"></td>
+            <td th:text="${appt.status}"></td>
+            <td>
+                <a th:href="@{/appointments/delete/{id}(id=${appt.id})}"
+                   onclick="return confirm('Cancel this appointment?');">Cancel</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

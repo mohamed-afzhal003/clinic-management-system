@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Patients</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="navbar">
+    <h1>🏥 Clinic Management System</h1>
+    <nav>
+        <a th:href="@{/patients}">Patients</a>
+        <a th:href="@{/doctors}">Doctors</a>
+        <a th:href="@{/appointments}">Appointments</a>
+    </nav>
+</header>
+
+<main class="content">
+    <div class="content-header">
+        <h2>Patients</h2>
+        <a class="btn" th:href="@{/patients/new}">+ Add Patient</a>
+    </div>
+
+    <form th:action="@{/patients}" method="get" class="search-bar">
+        <input type="text" name="search" placeholder="Search patient by name..." th:value="${search}">
+        <button type="submit">Search</button>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="patient : ${patients}">
+            <td th:text="${patient.name}"></td>
+            <td th:text="${patient.age}"></td>
+            <td th:text="${patient.gender}"></td>
+            <td th:text="${patient.phone}"></td>
+            <td th:text="${patient.address}"></td>
+            <td>
+                <a th:href="@{/patients/edit/{id}(id=${patient.id})}">Edit</a> |
+                <a th:href="@{/patients/delete/{id}(id=${patient.id})}"
+                   onclick="return confirm('Delete this patient record?');">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clinic Management System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="navbar">
+    <h1>🏥 Clinic Management System</h1>
+    <nav>
+        <a th:href="@{/patients}">Patients</a>
+        <a th:href="@{/doctors}">Doctors</a>
+        <a th:href="@{/appointments}">Appointments</a>
+    </nav>
+</header>
+
+<main class="dashboard">
+    <div class="card">
+        <h2>Patients</h2>
+        <p>Register new patients and manage records.</p>
+        <a class="btn" th:href="@{/patients}">Manage Patients</a>
+    </div>
+    <div class="card">
+        <h2>Doctors</h2>
+        <p>Maintain doctor profiles and specializations.</p>
+        <a class="btn" th:href="@{/doctors}">Manage Doctors</a>
+    </div>
+    <div class="card">
+        <h2>Appointments</h2>
+        <p>Book appointments with automatic conflict detection.</p>
+        <a class="btn" th:href="@{/appointments}">Manage Appointments</a>
+    </div>
+</main>
+</body>
+</html>

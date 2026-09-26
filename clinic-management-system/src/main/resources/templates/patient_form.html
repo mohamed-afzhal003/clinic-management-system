@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Form</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="navbar">
+    <h1>🏥 Clinic Management System</h1>
+    <nav>
+        <a th:href="@{/patients}">Patients</a>
+        <a th:href="@{/doctors}">Doctors</a>
+        <a th:href="@{/appointments}">Appointments</a>
+    </nav>
+</header>
+
+<main class="content">
+    <h2 th:text="${patient.id} != null ? 'Edit Patient' : 'Add Patient'"></h2>
+
+    <form th:action="@{/patients/save}" th:object="${patient}" method="post" class="form" onsubmit="return validateForm()">
+        <input type="hidden" th:field="*{id}">
+
+        <label>Name</label>
+        <input type="text" id="name" th:field="*{name}" required>
+        <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+
+        <label>Age</label>
+        <input type="number" id="age" th:field="*{age}" min="0" required>
+        <span class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+
+        <label>Gender</label>
+        <select th:field="*{gender}">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label>Phone</label>
+        <input type="text" id="phone" th:field="*{phone}" required>
+        <span class="error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+
+        <label>Address</label>
+        <textarea th:field="*{address}"></textarea>
+
+        <label>Medical History</label>
+        <textarea th:field="*{medicalHistory}"></textarea>
+
+        <button type="submit" class="btn">Save</button>
+        <a th:href="@{/patients}" class="btn secondary">Cancel</a>
+    </form>
+</main>
+
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

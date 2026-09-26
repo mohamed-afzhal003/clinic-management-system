@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor Form</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="navbar">
+    <h1>🏥 Clinic Management System</h1>
+    <nav>
+        <a th:href="@{/patients}">Patients</a>
+        <a th:href="@{/doctors}">Doctors</a>
+        <a th:href="@{/appointments}">Appointments</a>
+    </nav>
+</header>
+
+<main class="content">
+    <h2 th:text="${doctor.id} != null ? 'Edit Doctor' : 'Add Doctor'"></h2>
+
+    <form th:action="@{/doctors/save}" th:object="${doctor}" method="post" class="form">
+        <input type="hidden" th:field="*{id}">
+
+        <label>Name</label>
+        <input type="text" th:field="*{name}" required>
+        <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+
+        <label>Specialization</label>
+        <input type="text" th:field="*{specialization}" required placeholder="e.g. General Physician, Pediatrician">
+        <span class="error" th:if="${#fields.hasErrors('specialization')}" th:errors="*{specialization}"></span>
+
+        <label>Phone</label>
+        <input type="text" th:field="*{phone}">
+
+        <label>Available Hours</label>
+        <input type="text" th:field="*{availableHours}" placeholder="e.g. 09:00 - 17:00">
+
+        <button type="submit" class="btn">Save</button>
+        <a th:href="@{/doctors}" class="btn secondary">Cancel</a>
+    </form>
+</main>
+</body>
+</html>
